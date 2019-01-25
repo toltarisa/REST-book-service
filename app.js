@@ -8,7 +8,6 @@ const app = express();
 require('dotenv').config({path:__dirname+'/.env'});
 
 //mongo db connect
-//const config = require('./config/database');
 mongoose.connect(process.env.url,{useNewUrlParser:true})
 .then(connection=>{
     console.log('Connected Mongo DB');

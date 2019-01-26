@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Add Book</title>
+    <style>
+        .container{
+            display:flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #btn{
+            width:120px;
+            height:37px;
+            background:darkblue;
+            color:#fff;
+            border:1px solid #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <form action="/add" method="post">
+            <div>
+                <label>Title:</label>
+                <input type="text" name="title">
+            </div>
+            <br/>
+            <div>
+                <label>Author:</label>
+                <input type="text" name="author">
+            </div>
+            <br/>
+            <div>
+                <label>Category:</label>
+                <input type="text" name="category">
+            </div>
+            <br/>
+            <div>
+                <label>Language:</label>
+                <input type="text" name="title">
+            </div>
+            <br>
+            <button id="btn" type="submit">Add Book</button>
+            
+        </form>
+    </div>
+</body>
+</html>

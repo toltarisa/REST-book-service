@@ -28,14 +28,14 @@ router.post('/add',(req,res)=>{
     })
 });
 
-//showing books info
+//showing all books info
 router.get('/',(req,res)=>{
-    Book.find({},(err,books)=>{
-        if(err){
-            throw err;
-        }
-        console.log(books);
-    });
+     Book.find({ })
+    .then((data) => {
+		res.json(data);
+	}).catch((err) => {
+		res.json(err);
+	})
 })
 
 module.exports = router;

@@ -35,7 +35,7 @@ router.get('/',(req,res)=>{
 		res.json(data);
 	}).catch((err) => {
 		res.json(err);
-	})
-})
+	});
+});
 
 module.exports = router;

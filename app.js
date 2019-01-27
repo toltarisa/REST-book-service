@@ -33,7 +33,7 @@ app.use(bodyParser.urlencoded({extended:false}));
 
 //index route
 app.get('/',(req,res)=>{
-    res.json('hello');
+    res.render('index.ejs');
 });
 
 //router file

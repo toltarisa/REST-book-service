@@ -3,18 +3,39 @@ const mongoose = require('mongoose');
 const router = express.Router();
 
 //books Model
-const Books = require('../models/book');
+require('../models/book');
+const Book = mongoose.model('book');
 
-//home route
-router.get('/',(req,res)=>{
-    res.json({message: {type:'String'}});
-});
 
 //add book route
 router.get('/add',(req,res)=>{
     res.render('add');
 });
 
+router.post('/add',(req,res)=>{
+    let newBook = new Book();
+    newBook.title = req.body.title;
+    newBook.author = req.body.author;
+    newBook.category = req.body.category;
+    newBook.language = req.body.language;
 
+
+    newBook.save(err=>{
+        if(err)
+            throw err;
+        res.redirect('/books/add');
+        
+    })
+});
+
+//showing books info
+router.get('/',(req,res)=>{
+    Book.find({},(err,books)=>{
+        if(err){
+            throw err;
+        }
+        console.log(books);
+    });
+})
 
 module.exports = router;

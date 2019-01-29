@@ -12,7 +12,15 @@ router.get('/add',(req,res)=>{
     res.render('add');
 });
 
+
 router.post('/add',(req,res)=>{
+
+    if(!req.body.author || !req.body.title) {
+        return res.status(400).send({
+            message: "Book title or author can not be empty"
+        });
+    }
+
     let newBook = new Book();
     newBook.title = req.body.title;
     newBook.author = req.body.author;
@@ -36,6 +44,19 @@ router.get('/',(req,res)=>{
 	}).catch((err) => {
 		res.json(err);
 	});
+});
+
+
+//get books by id
+router.get('/:id',(req,res)=>{
+    let query = {_id : req.params.id};
+    Book.findById(query)
+    .then(data=>{
+        res.status(200).json(data);
+    })
+    .catch(err=>{
+        console.log(err);
+    });
 });
 
 module.exports = router;

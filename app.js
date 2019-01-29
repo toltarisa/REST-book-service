@@ -30,6 +30,8 @@ app.set('view engine','ejs');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:false}));
 
+//serving static files
+app.use(express.static(path.join(__dirname,'public')));
 
 //index route
 app.get('/',(req,res)=>{

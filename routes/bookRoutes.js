@@ -47,15 +47,38 @@ router.get('/',(req,res)=>{
 });
 
 
-//get books by id
-router.get('/:id',(req,res)=>{
-    let query = {_id : req.params.id};
-    Book.findById(query)
-    .then(data=>{
-        res.status(200).json(data);
+// //get books by id
+// router.get('/:id',(req,res)=>{
+//     const query = {_id : req.params.id};
+//     Book.findById(query)
+//     .then(data=>{
+//         res.status(200).json(data);
+//     })
+//     .catch(err=>{
+//         res.status(500).json({err:'Kitaplar alınırken hata olustu'});
+//     });
+// });
+
+//get books by title
+router.get('/:title',(req,res)=>{
+    const query = {title: req.params.title};
+    Book.find(query)
+    .then(response=>{
+        res.status(200).json(response);
     })
     .catch(err=>{
-        console.log(err);
+        res.status(500).json({err: 'Bu isimde bir kitap bulunamadi'});
+    });
+});
+
+//get books by category
+router.get('/:author',(req,res)=>{
+    Book.find({author:req.params.author})
+    .then(response=>{
+        res.status(200).json(response);
+    })
+    .catch(err=>{
+        res.status(500).json({err:'Böyle bir Yazar bulunmamaktadır'});
     });
 });
 

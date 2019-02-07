@@ -2,6 +2,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 const router = express.Router();
 
+
+ 
 //books Model
 require('../models/book');
 const Book = mongoose.model('book');
@@ -38,12 +40,14 @@ router.post('/add',(req,res)=>{
 
 //showing all books info
 router.get('/',(req,res)=>{
-     Book.find({ })
+     Book.find({})
     .then((data) => {
 		res.json(data);
 	}).catch((err) => {
 		res.json(err);
-	});
+    });
+    
+    
 });
 
 
@@ -60,26 +64,52 @@ router.get('/',(req,res)=>{
 // });
 
 //get books by title
-router.get('/:title',(req,res)=>{
-    const query = {title: req.params.title};
-    Book.find(query)
-    .then(response=>{
+router.get('/title/:title',(req,res)=>{
+
+    let query = {title: req.params.title};
+    Book.find(query,(err,response)=>{
+        if(err){
+           return res.render(err);
+        }
         res.status(200).json(response);
-    })
-    .catch(err=>{
-        res.status(500).json({err: 'Bu isimde bir kitap bulunamadi'});
     });
+});
+
+
+//get books by author
+router.get('/author/:author',(req,res)=>{
+    let query = {author: req.params.author};
+    Book.find(query,(err,response)=>{
+        if(err){
+            return res.render(err);
+        }
+        res.status(200).json(response);
+    });
+    
 });
 
 //get books by category
-router.get('/:author',(req,res)=>{
-    Book.find({author:req.params.author})
-    .then(response=>{
+
+router.get('/category/:category',(req,res)=>{
+
+    let query = {category: req.params.category};
+    Book.find(query,(err,response)=>{
+        if(err){
+           return res.render(err);
+        }
         res.status(200).json(response);
-    })
-    .catch(err=>{
-        res.status(500).json({err:'Böyle bir Yazar bulunmamaktadır'});
     });
 });
 
+//get books by language
+router.get('/language/:language',(req,res)=>{
+
+    let query = {language: req.params.language};
+    Book.find(query,(err,response)=>{
+        if(err){
+           return res.render(err);
+        }
+        res.status(200).json(response);
+    });
+});
 module.exports = router;

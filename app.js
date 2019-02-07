@@ -4,8 +4,10 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const path = require('path');
 const ejs = require('ejs');
+const cookieParser = require('cookie-parser');
 const port = process.env.PORT || 3000;
 const app = express();
+
 //require dotenv
 require('dotenv').config({path:__dirname+'/.env'});
 
@@ -30,13 +32,19 @@ app.set('view engine','ejs');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:false}));
 
+//cookieParser middleware
+app.use(cookieParser());
+
 //serving static files
 app.use(express.static(path.join(__dirname,'public')));
+
 
 //index route
 app.get('/',(req,res)=>{
     res.render('index.ejs');
 });
+
+app.set('etag', 'strong');
 
 //router file
 const books = require('./routes/bookRoutes');

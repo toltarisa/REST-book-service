@@ -4,7 +4,7 @@
   "description": "REST Service that gives book information",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha"
   },
   "author": "Isa Toltar",
   "license": "ISC",
@@ -19,6 +19,9 @@
     "path": "^0.12.7"
   },
   "devDependencies": {
+    "chai": "^4.2.0",
+    "chai-http": "^4.2.1",
+    "mocha": "^5.2.0",
     "nodemon": "^1.18.9"
   }
 }
